@@ -1,0 +1,55 @@
+
+  
+//Add in  controller, if they ask multiple microservices
+
+public List<CallDetailsDTO> getCustomerCallDetailsFallback(Long phoneNo) {
+        List<CallDetailsDTO> listCall=new ArrayList<CallDetailsDTO>();
+        return listCall;
+    }
+
+
+//Add Dependency in Eureka if it shows JPXB Error
+
+<dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.3.1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+<dependency>
+    <groupId>org.javassist</groupId>
+    <artifactId>javassist</artifactId>
+    <version>3.25.0-GA</version>
+</dependency>
+
+
+
+
+//Add dependency in MS 
+
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
+
+
+
+//For the instance if they said to chnage the port number 
+
+server.port=${PORT:${SERVER_PORT:0}}
+
+
+
+
+//For the Hystrix ,if they asked for the exception,add it in  controller of MS
+
+if(phoneNo==9009009001L) {
+            throw new RuntimeException();
+        }
+
+
+
+//if only one instance is reflecting then add it in the git of MS.properties
+
+eureka.instance.instance-id=${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
